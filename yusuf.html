@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf Air | Fly High, Fly Smart</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0066ff',
+                        bright: '#0080ff',
+                        sky: '#e6f0ff',
+                        darkblue: '#002666',
+                        accent: '#3399ff',
+                        bglight: '#f4f8ff'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-bglight text-darkblue font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Navbar -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                <div class="bg-primary text-white p-2.5 rounded-xl shadow-md">
+                    <i class="fa-solid fa-plane-departure text-xl"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight text-primary">Yusuf Air</span>
+            </div>
+            
+            <nav id="nav-links" class="hidden md:flex space-x-8 font-medium text-gray-600">
+                <a href="#" onclick="navigateTo('home')" class="hover:text-primary transition active-nav">Home</a>
+                <a href="#" onclick="navigateTo('dashboard')" class="hover:text-primary transition">Book Flight</a>
+                <a href="#" onclick="navigateTo('dashboard')" class="hover:text-primary transition">Destinations</a>
+                <a href="#" onclick="navigateTo('about')" class="hover:text-primary transition">About Us</a>
+            </nav>
+
+            <div id="nav-auth-area" class="flex items-center space-x-3">
+                <button onclick="openAuthModal('signin')" class="border-2 border-primary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-sky transition text-sm">Sign In</button>
+                <button onclick="openAuthModal('register')" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-darkblue transition text-sm shadow-md">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area (Multi-View Router) -->
+    <main class="flex-grow">
+
+        <!-- 1. HOME / LANDING VIEW -->
+        <section id="view-home" class="view-section">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-br from-primary to-bright text-white py-24 px-6 text-center relative overflow-hidden shadow-lg">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="max-w-4xl mx-auto relative z-10">
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">Explore the World with <span class="text-sky underline decoration-accent">Yusuf Air</span></h1>
+                    <p class="text-lg md:text-xl text-sky mb-10 opacity-90 max-w-2xl mx-auto">Book luxury and budget flights with top global airlines instantly with live dynamic pricing and secure global checkout.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="checkAuthAndGo('dashboard')" class="bg-white text-primary px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-sky transition transform hover:-translate-y-0.5 text-lg">
+                            <i class="fa-solid fa-plane mr-2"></i> Book Your Flight Now
+                        </button>
+                        <button onclick="navigateTo('about')" class="border-2 border-white text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition text-lg">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Highlights -->
+            <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-blue-100 text-center hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-sky text-primary rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-darkblue mb-2">Global Destinations</h3>
+                    <p class="text-gray-600">Connect to over 150+ premier international cities with top-tier alliance partners.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-blue-100 text-center hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-sky text-primary rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl">
+                        <i class="fa-solid fa-tags"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-darkblue mb-2">Live Dynamic Fares</h3>
+                    <p class="text-gray-600">Transparent real-time pricing calculated dynamically based on distance and class.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-blue-100 text-center hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-sky text-primary rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-darkblue mb-2">Secure Checkout</h3>
+                    <p class="text-gray-600">Multiple payment gateways including Cards, Apple Pay, Google Pay & PayPal simulation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. FLIGHT SEARCH & BOOKING DASHBOARD -->
+        <section id="view-dashboard" class="view-section hidden py-12 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-darkblue">Flight Search Dashboard</h2>
+                        <p class="text-gray-600" id="user-welcome-banner">Welcome back! Plan your next journey below.</p>
+                    </div>
+                    <div class="bg-white px-4 py-2 rounded-xl shadow-sm border border-blue-100 text-sm font-semibold text-primary">
+                        <i class="fa-solid fa-wallet mr-1"></i> Balance: <span id="user-wallet">$2,500.00</span>
+                    </div>
+                </div>
+
+                <!-- Search Card -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-blue-100 mb-12">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-darkblue">Where would you like to fly?</h3>
+                        <div class="flex gap-4 font-semibold text-sm">
+                            <label class="cursor-pointer flex items-center gap-2"><input type="radio" name="trip-type" checked class="text-primary focus:ring-primary"> Round Trip</label>
+                            <label class="cursor-pointer flex items-center gap-2"><input type="radio" name="trip-type" class="text-primary focus:ring-primary"> One Way</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                        <!-- Origin -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-darkblue"><i class="fa-solid fa-plane-departure text-primary mr-1"></i> Origin Country / City</label>
+                            <select id="origin-select" class="p-3.5 border-2 border-blue-100 rounded-xl font-medium focus:border-primary outline-none bg-white">
+                                <option value="New York (JFK)">🇺🇸 New York (JFK)</option>
+                                <option value="London (LHR)">🇬🇧 London (LHR)</option>
+                                <option value="Dubai (DXB)">🇦🇪 Dubai (DXB)</option>
+                                <option value="Singapore (SIN)">🇸🇬 Singapore (SIN)</option>
+                                <option value="Lagos (LOS)">🇳🇬 Lagos (LOS)</option>
+                            </select>
+                        </div>
+                        <!-- Destination -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-darkblue"><i class="fa-solid fa-plane-arrival text-primary mr-1"></i> Destination Country / City</label>
+                            <select id="destination-select" class="p-3.5 border-2 border-blue-100 rounded-xl font-medium focus:border-primary outline-none bg-white">
+                                <option value="Dubai (DXB)">🇦🇪 Dubai (DXB)</option>
+                                <option value="Tokyo (HND)">🇯🇵 Tokyo (HND)</option>
+                                <option value="Paris (CDG)">🇫🇷 Paris (CDG)</option>
+                                <option value="Sydney (SYD)">🇦🇺 Sydney (SYD)</option>
+                                <option value="New York (JFK)">🇺🇸 New York (JFK)</option>
+                            </select>
+                        </div>
+                        <!-- Date -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-darkblue"><i class="fa-solid fa-calendar text-primary mr-1"></i> Departure Date</label>
+                            <input type="date" id="flight-date" value="2026-06-15" class="p-3.5 border-2 border-blue-100 rounded-xl font-medium focus:border-primary outline-none">
+                        </div>
+                        <!-- Passengers -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-darkblue"><i class="fa-solid fa-users text-primary mr-1"></i> Passengers & Class</label>
+                            <select id="passenger-select" class="p-3.5 border-2 border-blue-100 rounded-xl font-medium focus:border-primary outline-none bg-white">
+                                <option value="1">1 Adult (Economy)</option>
+                                <option value="2">2 Adults (Economy)</option>
+                                <option value="business">1 Adult (Business Class)</option>
+                                <option value="family">Family Package (2 Adults + 2 Kids)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="searchFlights()" class="w-full bg-primary hover:bg-darkblue text-white py-4 rounded-xl font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass"></i> Search Available Flights
+                    </button>
+                </div>
+
+                <!-- Results Container -->
+                <div id="results-container" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-darkblue">Available Flights & Live Pricing</h3>
+                        <span class="text-sm bg-blue-100 text-primary px-3 py-1 rounded-full font-semibold" id="results-count">4 flights found</span>
+                    </div>
+                    <div id="flight-cards-grid" class="grid grid-cols-1 gap-6">
+                        <!-- Dynamically generated flight items -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SECURE PAYMENT PAGE (MULTI-OPTION) -->
+        <section id="view-payment" class="view-section hidden py-12 px-6">
+            <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-blue-100">
+                <div class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-darkblue flex items-center gap-3">
+                            <i class="fa-solid fa-lock text-primary"></i> Secure Checkout
+                        </h2>
+                        <p class="text-gray-500 text-sm">Complete your payment to reserve your ticket.</p>
+                    </div>
+                    <button onclick="navigateTo('dashboard')" class="text-sm font-semibold text-primary hover:underline">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Back to Flights
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Booking Summary Box -->
+                    <div class="md:col-span-1 bg-sky p-6 rounded-2xl flex flex-col justify-between h-fit">
+                        <div>
+                            <h3 class="font-bold text-darkblue text-lg mb-4">Booking Summary</h3>
+                            <div class="space-y-3 text-sm" id="payment-summary-content">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-blue-200">
+                            <div class="flex justify-between font-extrabold text-lg text-darkblue">
+                                <span>Total Amount:</span>
+                                <span id="summary-total-price" class="text-primary">$850.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Form & Options -->
+                    <div class="md:col-span-2">
+                        <!-- Payment Method Tabs -->
+                        <div class="grid grid-cols-3 gap-3 mb-6">
+                            <button onclick="switchPaymentTab('card')" id="tab-card" class="payment-tab p-3 rounded-xl border-2 border-primary bg-sky font-bold text-primary text-sm flex flex-col items-center gap-1 transition">
+                                <i class="fa-solid fa-credit-card text-lg"></i> Card
+                            </button>
+                            <button onclick="switchPaymentTab('digital')" id="tab-digital" class="payment-tab p-3 rounded-xl border-2 border-gray-200 bg-white font-bold text-gray-600 text-sm flex flex-col items-center gap-1 transition hover:border-primary">
+                                <i class="fa-brands fa-apple-pay text-lg"></i> Apple / Google Pay
+                            </button>
+                            <button onclick="switchPaymentTab('paypal')" id="tab-paypal" class="payment-tab p-3 rounded-xl border-2 border-gray-200 bg-white font-bold text-gray-600 text-sm flex flex-col items-center gap-1 transition hover:border-primary">
+                                <i class="fa-brands fa-paypal text-lg"></i> PayPal
+                            </button>
+                        </div>
+
+                        <form id="checkout-form" onsubmit="processPayment(event)">
+                            <!-- Card Section -->
+                            <div id="section-card" class="space-y-4 payment-section">
+                                <div>
+                                    <label class="block text-sm font-bold text-darkblue mb-1">Cardholder Name</label>
+                                    <input type="text" id="card-name" placeholder="Yusuf Al-Amin" required class="w-full p-3.5 border-2 border-blue-100 rounded-xl focus:border-primary outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-darkblue mb-1">Card Number</label>
+                                    <input type="text" placeholder="4111 2222 3333 4444" maxlength="19" required class="w-full p-3.5 border-2 border-blue-100 rounded-xl focus:border-primary outline-none">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-darkblue mb-1">Expiry Date</label>
+                                        <input type="text" placeholder="MM/YY" maxlength="5" required class="w-full p-3.5 border-2 border-blue-100 rounded-xl focus:border-primary outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-darkblue mb-1">CVV</label>
+                                        <input type="password" placeholder="123" maxlength="4" required class="w-full p-3.5 border-2 border-blue-100 rounded-xl focus:border-primary outline-none">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Digital Wallets Section -->
+                            <div id="section-digital" class="space-y-4 payment-section hidden py-8 text-center bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                                <i class="fa-brands fa-google-pay text-5xl text-gray-700 mx-2"></i>
+                                <i class="fa-brands fa-apple-pay text-5xl text-gray-700 mx-2"></i>
+                                <p class="text-sm font-semibold text-gray-600 mt-2">Click below to authorize securely via your biometric wallet device.</p>
+                            </div>
+
+                            <!-- PayPal Section -->
+                            <div id="section-paypal" class="space-y-4 payment-section hidden py-8 text-center bg-blue-50/50 rounded-2xl border-2 border-dashed border-blue-200">
+                                <i class="fa-brands fa-paypal text-5xl text-blue-600 mb-2"></i>
+                                <p class="text-sm font-semibold text-blue-900">You will be securely redirected to PayPal to complete your payment.</p>
+                            </div>
+
+                            <button type="submit" class="w-full mt-8 bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-xl font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-shield-check"></i> Complete Secure Payment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. BOOKING CONFIRMATION & TICKET VIEW -->
+        <section id="view-confirmation" class="view-section hidden py-16 px-6">
+            <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-blue-100 text-center">
+                <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h2 class="text-3xl font-extrabold text-darkblue mb-2">Booking Confirmed!</h2>
+                <p class="text-gray-600 mb-8">Thank you for flying with Yusuf Air. Your e-ticket has been generated successfully.</p>
+
+                <!-- Ticket Card -->
+                <div id="ticket-card" class="bg-gradient-to-br from-darkblue to-primary text-white p-8 rounded-2xl text-left relative overflow-hidden shadow-xl mb-8">
+                    <div class="absolute -right-10 -bottom-10 text-white/5 text-9xl font-black">
+                        <i class="fa-solid fa-plane"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-6 border-b border-white/20 pb-4">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-sky font-bold">E-Ticket Reference</span>
+                            <h4 id="ticket-ref-code" class="text-2xl font-extrabold text-white">#YA-84920</h4>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs uppercase tracking-widest text-sky font-bold">Airline Partner</span>
+                            <h4 id="ticket-airline" class="text-lg font-bold">Emirates</h4>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <span class="text-xs text-sky font-semibold">Route</span>
+                            <p id="ticket-route" class="text-lg font-bold">New York (JFK) ➔ Dubai (DXB)</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-sky font-semibold">Date & Time</span>
+                            <p id="ticket-time" class="text-lg font-bold">2026-06-15 | 08:00 AM</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-4 border-t border-white/20 text-sm">
+                        <div>
+                            <span class="text-xs text-sky">Passenger Name</span>
+                            <p id="ticket-passenger-name" class="font-bold">Yusuf Al-Amin</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-sky">Fare Paid</span>
+                            <p id="ticket-fare" class="font-bold text-sky text-lg">$850.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="window.print()" class="bg-primary hover:bg-darkblue text-white px-6 py-3.5 rounded-xl font-bold shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-print"></i> Print / Save Ticket
+                    </button>
+                    <button onclick="navigateTo('dashboard')" class="border-2 border-primary text-primary px-6 py-3.5 rounded-xl font-bold hover:bg-sky transition">
+                        Book Another Flight
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. ABOUT US VIEW -->
+        <section id="view-about" class="view-section hidden py-16 px-6">
+            <div class="max-w-4xl mx-auto bg-white p-10 rounded-3xl shadow-sm border border-blue-100">
+                <h2 class="text-3xl font-extrabold text-darkblue mb-6">About Yusuf Air</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Founded with a vision to redefine modern sky travel, Yusuf Air bridges luxury, efficiency, and unbeatable pricing. Partnering with top global carriers such as Emirates, Qatar Airways, Singapore Airlines, and British Airways, we deliver seamless, world-class journey experiences right at your fingertips.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <div class="bg-sky p-6 rounded-2xl">
+                        <h4 class="font-bold text-darkblue text-lg mb-2"><i class="fa-solid fa-award text-primary mr-2"></i> Our Mission</h4>
+                        <p class="text-gray-600 text-sm">To provide secure, fast, and delightful flight bookings worldwide with absolute transparency in pricing.</p>
+                    </div>
+                    <div class="bg-sky p-6 rounded-2xl">
+                        <h4 class="font-bold text-darkblue text-lg mb-2"><i class="fa-solid fa-headset text-primary mr-2"></i> 24/7 Support</h4>
+                        <p class="text-gray-600 text-sm">Our dedicated concierge desk is always ready to assist you anywhere around the globe.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- AUTHENTICATION / REGISTRATION MODAL -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 relative overflow-hidden border border-blue-100">
+            <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-gray-400 hover:text-darkblue text-xl font-bold">&times;</button>
+            
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mx-auto mb-3 shadow-md text-xl">
+                    <i class="fa-solid fa-user-lock"></i>
+                </div>
+                <h3 id="auth-modal-title" class="text-2xl font-extrabold text-darkblue">Sign In to Yusuf Air</h3>
+                <p class="text-xs text-gray-500 mt-1">Access your dashboard and reserved flights</p>
+            </div>
+
+            <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div id="name-field-group" class="hidden">
+                    <label class="block text-xs font-bold text-darkblue uppercase mb-1">Full Name</label>
+                    <input type="text" id="reg-name" placeholder="Yusuf Al-Amin" class="w-full p-3 border-2 border-blue-100 rounded-xl focus:border-primary outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-darkblue uppercase mb-1">Email Address</label>
+                    <input type="email" id="auth-email" placeholder="yusuf@example.com" required class="w-full p-3 border-2 border-blue-100 rounded-xl focus:border-primary outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-darkblue uppercase mb-1">Password</label>
+                    <input type="password" id="auth-password" placeholder="••••••••" required class="w-full p-3 border-2 border-blue-100 rounded-xl focus:border-primary outline-none">
+                </div>
+                
+                <button type="submit" id="auth-submit-btn" class="w-full bg-primary hover:bg-darkblue text-white py-3.5 rounded-xl font-bold shadow-lg transition">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="mt-6 text-center text-sm">
+                <p id="auth-switch-text" class="text-gray-600">Don't have an account? <span onclick="toggleAuthMode('register')" class="text-primary font-bold cursor-pointer hover:underline">Register now</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification / Message Box (Custom modal instead of alert) -->
+    <div id="message-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 text-center">
+            <div id="msg-icon" class="w-12 h-12 bg-sky text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <h4 id="msg-title" class="font-bold text-lg text-darkblue mb-2">Notice</h4>
+            <p id="msg-body" class="text-gray-600 text-sm mb-6">Action processed successfully.</p>
+            <button onclick="closeMessageModal()" class="w-full bg-primary text-white py-2.5 rounded-xl font-bold hover:bg-darkblue transition">OK</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-darkblue text-white py-10 mt-20">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="bg-primary text-white p-2 rounded-lg">
+                        <i class="fa-solid fa-plane-departure text-lg"></i>
+                    </div>
+                    <span class="text-xl font-extrabold text-white">Yusuf Air</span>
+                </div>
+                <p class="text-gray-400 text-sm">Bright Blue Horizons. Luxury and budget air travel connecting continents.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-3 text-sky">Quick Links</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li><a href="#" onclick="navigateTo('home')" class="hover:text-white">Home</a></li>
+                    <li><a href="#" onclick="checkAuthAndGo('dashboard')" class="hover:text-white">Book Flight</a></li>
+                    <li><a href="#" onclick="navigateTo('about')" class="hover:text-white">About Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-3 text-sky">Partner Airlines</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>Emirates</li>
+                    <li>Qatar Airways</li>
+                    <li>Singapore Airlines</li>
+                    <li>British Airways</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-3 text-sky">Global Support</h4>
+                <p class="text-sm text-gray-300 mb-2">support@yusufair.com</p>
+                <p class="text-sm text-gray-300">+1 (800) 555-YUSUF</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-6 border-t border-white/10 text-center text-sm text-gray-400">
+            &copy; 2026 Yusuf Air. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Application State
+        let currentUser = null; // { name, email }
+        let currentAuthMode = 'signin'; // 'signin' or 'register'
+        let selectedFlight = null;
+
+        // Partner Airlines pool
+        const partnerAirlines = [
+            { name: "Emirates", code: "EK", icon: "fa-plane" },
+            { name: "Qatar Airways", code: "QR", icon: "fa-jet-fighter" },
+            { name: "Singapore Airlines", code: "SQ", icon: "fa-paper-plane" },
+            { name: "British Airways", code: "BA", icon: "fa-cloud" }
+        ];
+
+        // View Router
+        function navigateTo(viewId) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById('view-' + viewId);
+            if(target) target.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function checkAuthAndGo(viewId) {
+            if(!currentUser) {
+                showMessage("Authentication Required", "Please sign in or register to access flight bookings.", "warning");
+                openAuthModal('signin');
+                return;
+            }
+            navigateTo(viewId);
+        }
+
+        // Custom Message Box (Replaces alert())
+        function showMessage(title, body, type = 'info') {
+            document.getElementById('msg-title').innerText = title;
+            document.getElementById('msg-body').innerText = body;
+            const iconEl = document.getElementById('msg-icon');
+            if(type === 'warning') {
+                iconEl.className = "w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl";
+                iconEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            } else {
+                iconEl.className = "w-12 h-12 bg-sky text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-2xl";
+                iconEl.innerHTML = '<i class="fa-solid fa-circle-info"></i>';
+            }
+            document.getElementById('message-modal').classList.remove('hidden');
+        }
+
+        function closeMessageModal() {
+            document.getElementById('message-modal').classList.add('hidden');
+        }
+
+        // Authentication Modal Handlers
+        function openAuthModal(mode) {
+            currentAuthMode = mode;
+            const titleEl = document.getElementById('auth-modal-title');
+            const btnEl = document.getElementById('auth-submit-btn');
+            const nameGroup = document.getElementById('name-field-group');
+            const switchText = document.getElementById('auth-switch-text');
+
+            if(mode === 'register') {
+                titleEl.innerText = "Create Yusuf Air Account";
+                btnEl.innerText = "Register & Continue";
+                nameGroup.classList.remove('hidden');
+                switchText.innerHTML = `Already have an account? <span onclick="toggleAuthMode('signin')" class="text-primary font-bold cursor-pointer hover:underline">Sign In</span>`;
+            } else {
+                titleEl.innerText = "Sign In to Yusuf Air";
+                btnEl.innerText = "Sign In";
+                nameGroup.classList.add('hidden');
+                switchText.innerHTML = `Don't have an account? <span onclick="toggleAuthMode('register')" class="text-primary font-bold cursor-pointer hover:underline">Register now</span>`;
+            }
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+
+        function toggleAuthMode(mode) {
+            openAuthModal(mode);
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const nameInput = document.getElementById('reg-name').value;
+            
+            currentUser = {
+                name: currentAuthMode === 'register' && nameInput ? nameInput : email.split('@')[0],
+                email: email
+            };
+
+            // Update UI Navbar Auth Area
+            const authArea = document.getElementById('nav-auth-area');
+            authArea.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="text-right hidden sm:block">
+                        <div class="text-xs text-gray-500">Logged in as</div>
+                        <div class="font-bold text-sm text-darkblue">${currentUser.name}</div>
+                    </div>
+                    <button onclick="handleLogout()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-semibold transition">Logout</button>
+                </div>
+            `;
+
+            document.getElementById('user-welcome-banner').innerText = `Welcome back, ${currentUser.name}! Plan your next journey below.`;
+
+            closeAuthModal();
+            document.getElementById('auth-form').reset();
+            showMessage("Success", `Welcome ${currentUser.name}! You are now successfully signed in.`);
+            navigateTo('dashboard');
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            const authArea = document.getElementById('nav-auth-area');
+            authArea.innerHTML = `
+                <button onclick="openAuthModal('signin')" class="border-2 border-primary text-primary px-4 py-2 rounded-lg font-semibold hover:bg-sky transition text-sm">Sign In</button>
+                <button onclick="openAuthModal('register')" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-darkblue transition text-sm shadow-md">Register</button>
+            `;
+            navigateTo('home');
+            showMessage("Logged Out", "You have been successfully logged out.");
+        }
+
+        // Dynamic Real-World Flight Search & Pricing
+        function searchFlights() {
+            const origin = document.getElementById('origin-select').value;
+            const destination = document.getElementById('destination-select').value;
+            const date = document.getElementById('flight-date').value;
+            const passengerType = document.getElementById('passenger-select').value;
+
+            if(origin === destination) {
+                showMessage("Invalid Route", "Origin and destination cannot be the same city.", "warning");
+                return;
+            }
+
+            const resultsContainer = document.getElementById('results-container');
+            const grid = document.getElementById('flight-cards-grid');
+            grid.innerHTML = '';
+            resultsContainer.classList.remove('hidden');
+
+            // Generate base price algorithmically based on character code length differences to simulate distance
+            const baseDistanceFactor = Math.abs(origin.charCodeAt(0) - destination.charCodeAt(0)) * 18 + 320;
+            
+            let multiplier = 1;
+            let paxLabel = "1 Adult";
+            if(passengerType === '2') { multiplier = 1.9; paxLabel = "2 Adults"; }
+            else if(passengerType === 'business') { multiplier = 2.8; paxLabel = "1 Adult (Business)"; }
+            else if(passengerType === 'family') { multiplier = 3.5; paxLabel = "Family Package"; }
+
+            partnerAirlines.forEach((airline, index) => {
+                const flightNo = `${airline.code}-${Math.floor(100 + Math.random() * 899)}`;
+                const randomHour = 6 + (index * 4);
+                const timeString = `${randomHour}:00 AM - ${(randomHour+5)%12 || 12}:30 PM`;
+                
+                // Add slight variation per airline
+                const finalPrice = Math.round((baseDistanceFactor + (index * 45)) * multiplier);
+
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-2xl shadow-sm border border-blue-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:shadow-md transition';
+                card.innerHTML = `
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-sky text-primary rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid ${airline.icon}"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="font-extrabold text-lg text-darkblue">${airline.name}</h4>
+                                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded font-mono font-semibold">${flightNo}</span>
+                            </div>
+                            <p class="text-gray-700 font-medium text-sm mt-1">${origin} &nbsp;<i class="fa-solid fa-arrow-right text-primary text-xs"></i>&nbsp; ${destination}</p>
+                            <p class="text-gray-500 text-xs mt-1"><i class="fa-regular fa-clock mr-1"></i> ${timeString} &bull; Date: ${date} &bull; ${paxLabel}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between w-full md:w-auto gap-6 border-t md:border-t-0 pt-4 md:pt-0 border-gray-100">
+                        <div class="text-left md:text-right">
+                            <div class="text-xs text-gray-500 uppercase font-semibold">Total Fare</div>
+                            <div class="text-2xl font-extrabold text-darkblue">$${finalPrice}.00</div>
+                        </div>
+                        <button onclick="proceedToPayment('${airline.name}', '${flightNo}', '${origin} ➔ ${destination}', '$${finalPrice}.00', '${date}')" class="bg-primary hover:bg-darkblue text-white px-6 py-3 rounded-xl font-bold transition shadow-md">
+                            Book Now
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Payment Tab Switcher
+        function switchPaymentTab(method) {
+            document.querySelectorAll('.payment-tab').forEach(tab => {
+                tab.className = "payment-tab p-3 rounded-xl border-2 border-gray-200 bg-white font-bold text-gray-600 text-sm flex flex-col items-center gap-1 transition hover:border-primary";
+            });
+            document.querySelectorAll('.payment-section').forEach(sec => sec.classList.add('hidden'));
+
+            if(method === 'card') {
+                document.getElementById('tab-card').className = "payment-tab p-3 rounded-xl border-2 border-primary bg-sky font-bold text-primary text-sm flex flex-col items-center gap-1 transition";
+                document.getElementById('section-card').classList.remove('hidden');
+            } else if(method === 'digital') {
+                document.getElementById('tab-digital').className = "payment-tab p-3 rounded-xl border-2 border-primary bg-sky font-bold text-primary text-sm flex flex-col items-center gap-1 transition";
+                document.getElementById('section-digital').classList.remove('hidden');
+            } else if(method === 'paypal') {
+                document.getElementById('tab-paypal').className = "payment-tab p-3 rounded-xl border-2 border-primary bg-sky font-bold text-primary text-sm flex flex-col items-center gap-1 transition";
+                document.getElementById('section-paypal').classList.remove('hidden');
+            }
+        }
+
+        // Proceed to Payment Page
+        function proceedToPayment(airline, flightNo, route, price, date) {
+            if(!currentUser) {
+                showMessage("Authentication Required", "Please sign in before making a booking.", "warning");
+                openAuthModal('signin');
+                return;
+            }
+
+            selectedFlight = { airline, flightNo, route, price, date };
+
+            // Populate Payment Summary
+            document.getElementById('payment-summary-content').innerHTML = `
+                <div><strong>Airline:</strong> ${airline} (${flightNo})</div>
+                <div><strong>Route:</strong> ${route}</div>
+                <div><strong>Date:</strong> ${date}</div>
+                <div><strong>Passenger:</strong> ${currentUser.name}</div>
+            `;
+            document.getElementById('summary-total-price').innerText = price;
+            if(document.getElementById('card-name')) {
+                document.getElementById('card-name').value = currentUser.name;
+            }
+
+            navigateTo('payment');
+        }
+
+        // Process Payment & Generate Ticket
+        function processPayment(e) {
+            e.preventDefault();
+
+            // Generate Ticket Reference Code
+            const randomRef = '#YA-' + Math.floor(10000 + Math.random() * 90000);
+            
+            // Populate Ticket View
+            document.getElementById('ticket-ref-code').innerText = randomRef;
+            document.getElementById('ticket-airline').innerText = selectedFlight.airline;
+            document.getElementById('ticket-route').innerText = selectedFlight.route;
+            document.getElementById('ticket-time').innerText = `${selectedFlight.date} | 08:00 AM`;
+            document.getElementById('ticket-passenger-name').innerText = currentUser.name;
+            document.getElementById('ticket-fare').innerText = selectedFlight.price;
+
+            navigateTo('confirmation');
+        }
+    </script>
+</body>
+</html>
